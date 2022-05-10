@@ -2,41 +2,32 @@
 .spyproject/
 
 # app
-app/client/*_bkp_*
-app/nginx/*_bkp_*
-app/server/*_bkp_*
+app/client/*bkp*
+app/nginx/*bkp*
+app/server/*bkp*
 app/server/__pycache__
 app/server/*.pyc
 
 # model
 model/.ipynb_checkpoints
 model/catboost_info
-model/*_bkp_*
+model/*bkp*
 model/list_*.pkl
 model/model_*.pkl
+model/
 
 # data
 /data
+data/*bkp*
+data/get_data.py
 
 # qgis
-/qgis/*_bkp_*
+/qgis/*bkp*
 
 # deployment
-*_bkp_*
-get_data.py
-README_gcloud.md
-TODO
+/deploy/*bkp*
 
-data/comunas
-data/regions
-data/*.css
-data/data_reg.pkl
-data/*_tmp.geojson
-data/*_bkp_*
-data/*_o.*
-user_test/
-*_bkp_*
-*.pdf
-app_example.py
-map.html
+# home
+*bkp*
+README_gcloud.md
 TODO
