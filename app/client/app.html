@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Santiago Apartment Rent Prediction</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="app.js"></script>
+	<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="img"></div>
+<form class="form">
+    <h2>Surface (m2)</h2>
+    <input class="area" type="text" id="uiArea" class="floatLabel" name="Area" value="50">    
+</form>    
+<!------------------------------------------------------------------------>	        
+<form class="form">
+    <h2>Bedrooms</h2>
+    <select class="bedrooms" name="" id="uiBedrooms">
+        <option value="" disabled="disabled" selected="selected">Select Number of Bedrooms</option>
+    	<option>1</option>
+        <option>2</option>
+    	<option>3</option>
+    	<option>4 or more</option>
+    </select>
+</form>    				
+<!------------------------------------------------------------------------>	
+<form class="form">
+	<h2>Bathrooms</h2>
+    <select class="bathrooms" name="" id="uiBathrooms">
+        <option value="" disabled="disabled" selected="selected">Select Number of Bathrooms</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4 or more</option>
+    </select>		
+</form>    			    			
+<!------------------------------------------------------------------------>	    			
+<form class="form">
+    <h2>Location</h2>
+    <select class="location" name="" id="uiLocations">
+        <option value="" disabled="disabled" selected="selected">Select Location</option>
+		<option>Santiago</option>
+    </select>
+</form>    			    			    
+<!------------------------------------------------------------------------>	   
+<form class="form"> 			
+<button class="submit" onclick="onClickedPredictPrice()" type="button">Predict Price</button>
+<div id="uiPredictPrice" class="result">	<h2></h2> </div>
+</form>    			    			    
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+    "family": "hpsantiago-task",
+    "networkMode": "host",
+    "containerDefinitions": [
+        {
+            "name": "hpsantiago-container",
+            "image": "672308506165.dkr.ecr.us-east-2.amazonaws.com/home-prices-santiago:latest",
+            "portMappings": [
+                {
+                    "containerPort": 5000,
+                    "hostPort": 5000
+                }
+            ]            
+        }
+    ],
+    "requiresCompatibilities": [
+        "EC2"
+    ],    
+    "cpu": "1024",
+    "memory": "900"
+}

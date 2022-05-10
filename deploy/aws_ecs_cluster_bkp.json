@@ -1,0 +1,18 @@
+{
+    "clusterName": "cluster-home-prices-santiago",
+    "configuration": {
+        "executeCommandConfiguration": {
+            "logging": "DEFAULT",
+        }
+    },
+    "capacityProviders": [
+        ""
+    ],
+    "defaultCapacityProviderStrategy": [
+        {
+            "capacityProvider": "",
+            "weight": 0,
+            "base": 0
+        }
+    ]
+}

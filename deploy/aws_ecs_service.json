@@ -1,0 +1,31 @@
+{
+    "cluster": "hpsantiago-cluster",
+    "serviceName": "hpsantiago-service",
+    "taskDefinition": "hpsantiago-task:1",
+    "desiredCount": 1,
+    "launchType": "EC2",
+    "deploymentConfiguration": {
+        "deploymentCircuitBreaker": {
+            "enable": false,
+            "rollback": true
+        },
+        "maximumPercent": 200,
+        "minimumHealthyPercent": 100
+    },
+    "placementStrategy": [
+        {
+            "type": "spread",
+            "field": "attribute:ecs.availability-zone"
+        },
+        {
+            "type": "spread",
+            "field": "instanceId"
+        }        
+    ],
+    "schedulingStrategy": "REPLICA",
+    "deploymentController": {
+        "type": "ECS"
+    },
+    "enableECSManagedTags": true,
+    "enableExecuteCommand": false
+}
