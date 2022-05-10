@@ -4,7 +4,7 @@
     "containerDefinitions": [
         {
             "name": "hpsantiago-container",
-            "image": "672308506165.dkr.ecr.us-east-2.amazonaws.com/home-prices-santiago:latest",
+            "image": "<aws_account_id>.dkr.ecr.us-east-2.amazonaws.com/home-prices-santiago:latest",
             "portMappings": [
                 {
                     "containerPort": 5000,
