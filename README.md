@@ -6,7 +6,7 @@ This data science project showcases a real estate price prediction study in Sant
 A Web Application displays the rent prices of apartments in Santiago, which are predicted 
 by a machine learning model. 
 
-The raw dataset containing the apartment listings (...) was extracted from the website https://www.portalinmobiliario.com/ 
+The raw dataset containing the apartment listings (`model/RENT_APARTMENT_RM_raw.csv`) was extracted from the website https://www.portalinmobiliario.com/ 
 through web scraping using `Selenium` and `BeautifulSoup`.  
 
 This raw dataset was transformed through several stages of analysis, which are reported in several
