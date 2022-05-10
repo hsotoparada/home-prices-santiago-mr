@@ -58,7 +58,7 @@ to handle the http requests.
 
 We will deploy our Web Application to the **Amazon Web Services (AWS) Cloud**.
 For this, we first build a docker image of our Web Application, based on the intructions 
-contained in the Dockerfile stored in the home directory of our git repository.
+contained in the Dockerfile stored in the root directory of our git repository.
 
 ```
 docker build -t home-prices-santiago:1.0 .
