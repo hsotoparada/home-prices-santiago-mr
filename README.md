@@ -96,7 +96,8 @@ to authenticate the **Docker** CLI to our default registry, so that **Docker** c
 We do this as described in the **AWS** documentation (https://docs.aws.amazon.com/AmazonECR/latest/userguide/getting-started-cli.html):
 
 ```
-aws ecr get-login-password --region <region> | docker login --username AWS --password-stdin <aws_account_id>.dkr.ecr.<region>.amazonaws.com
+aws ecr get-login-password --region <region> | docker login --username AWS \
+    --password-stdin <aws_account_id>.dkr.ecr.<region>.amazonaws.com
 ```
 
 Next, we create a repository in **AWS ECR**:
@@ -139,17 +140,21 @@ Then we configure the **AWS ECS** CLI, by creating an **ECS** cluster and profil
 (see documentation: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-cli-tutorial-ec2.html).
 
 ```
-ecs-cli configure --cluster hpsantiago-cluster --default-launch-type EC2 --config-name hpsantiago-cluster-config --region <region>
+ecs-cli configure --cluster hpsantiago-cluster --default-launch-type EC2 \
+    --config-name hpsantiago-cluster-config --region <region>
 ```
 
 ```
-ecs-cli configure profile --profile-name hpsantiago-cluster-config-profile --access-key <aws_access_key_id> --secret-key <aws_secret_access_key>
+ecs-cli configure profile --profile-name hpsantiago-cluster-config-profile \
+    --access-key <aws_access_key_id> --secret-key <aws_secret_access_key>
 ```
 
 Once the configuration steps are done, we create the **ECS** cluster using the configurations defined above.
 
 ```
-ecs-cli up --capability-iam --keypair <keypair_name> --size 1 --instance-type t2.micro --cluster-config hpsantiago-cluster-config --ecs-profile hpsantiago-cluster-config-profile --security-group <security_group_ids> --vpc <vpc_id> --subnets <subnet_1_id,subnet_2_id> --verbose
+ecs-cli up --capability-iam --keypair <keypair_name> --size 1 --instance-type t2.micro \
+    --cluster-config hpsantiago-cluster-config --ecs-profile hpsantiago-cluster-config-profile \
+    --security-group <security_group_ids> --vpc <vpc_id> --subnets <subnet_1_id,subnet_2_id> --verbose
 ```
 
 Here `<vpc_id>` can be obtained from: `aws ec2 describe-security-groups --group-id <security_group_id>`.
@@ -161,11 +166,11 @@ We can define this deployment as a registered task, which we then run and use to
 The following commands perform these deployment steps:
 
 ```
-aws ecs register-task-definition --cli-input-json file:///<path>/home-prices-santiago/aws_ecs_task_definition.json
+aws ecs register-task-definition --cli-input-json file:///<path>/home-prices-santiago/deploy/aws_ecs_task_definition.json
 
-aws ecs run-task --cli-input-json file:///<path>/home-prices-santiago/aws_ecs_task_run.json
+aws ecs run-task --cli-input-json file:///<path>/home-prices-santiago/deploy/aws_ecs_task_run.json
 
-aws ecs create-service --cli-input-json file:///<path>/home-prices-santiago/aws_ecs_service.json
+aws ecs create-service --cli-input-json file:///<path>/home-prices-santiago/deploy/aws_ecs_service.json
 ```
 
 From the **AWS Console**, we should now be able to see that the defined task and service are running.
