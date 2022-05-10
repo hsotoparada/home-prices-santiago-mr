@@ -1,0 +1,42 @@
+# spyder
+.spyproject/
+
+# app
+app/client/*_bkp_*
+app/nginx/*_bkp_*
+app/server/*_bkp_*
+app/server/__pycache__
+app/server/*.pyc
+
+# model
+model/.ipynb_checkpoints
+model/catboost_info
+model/*_bkp_*
+model/list_*.pkl
+model/model_*.pkl
+
+# data
+/data
+
+# qgis
+/qgis/*_bkp_*
+
+# deployment
+*_bkp_*
+get_data.py
+README_gcloud.md
+TODO
+
+data/comunas
+data/regions
+data/*.css
+data/data_reg.pkl
+data/*_tmp.geojson
+data/*_bkp_*
+data/*_o.*
+user_test/
+*_bkp_*
+*.pdf
+app_example.py
+map.html
+TODO
