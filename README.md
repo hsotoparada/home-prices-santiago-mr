@@ -19,7 +19,7 @@ that was applied to the training and test sets extracted from original dataset.
 Next, in the **Model Building** stage, various type of models, based on different algorithms, were trained to predict apartment 
 rent prices, in a supervised regression learning task.
 For each model type, the training was carried out applying a 5-fold cross validation on the training set, and performing 
-hyperparameter optimization using `Optuna`.
+hyperparameter optimization using **Optuna**.
 Here the parameters of each model type, as well as all possible set of predictor features in the training set, were considered as 
 hyperparameters to be optimized.
 The following algorithms were used for model training:
@@ -37,7 +37,7 @@ on the training and test sets by the selected model(s) for deployment.
 Similar data distributions can be visualized as the different layers in the QGIS project 
 stored in `qgis/home-prices-santiago.qgz`.
 
-# Building Web Application for Predicting Prices of Apartments
+## Building Web Application for Predicting Prices of Apartments
 
 The Web Application makes use of the selected model(s) to make predictions of the rent prices of 
 apartments in Santiago and displays this information to the user.
@@ -52,9 +52,9 @@ to handle the http requests.
 
 ### TODO: include screenshot of dashboard
 
-# Deploying Web Application to AWS Cloud (ECR, EC2, ECS)
+## Deploying Web Application to AWS Cloud (ECR, EC2, ECS)
 
-## Containerizing Web Application:
+### Containerizing Web Application:
 
 We will deploy our Web Application to the **Amazon Web Services (AWS) Cloud**.
 For this, we first build a docker image of our Web Application, based on the intructions 
@@ -88,7 +88,7 @@ docker logs <container_id>
 And we should be able to see our Web Application by openning a browser at the at http://127.0.0.1 
 or its alias http://localhost.
 
-## Pushing Docker image to AWS ECR:
+### Pushing Docker image to AWS ECR:
 
 Once we checked that our Web Application can be accessed from our local machine, we can start deploying it to AWS. 
 
@@ -119,7 +119,7 @@ Finally, we push the **Docker** image to **ECR**:
 docker push <aws_account_id>.dkr.ecr.<region>.amazonaws.com/home-prices-santiago:latest
 ```
 
-## Deploying Docker container to AWS EC2, ECS:
+### Deploying Docker container to AWS EC2, ECS:
 
 Now, we will make use of the **AWS Command Line Interface** (CLI) tool to deploy the **Docker** image stored in **ECR** 
 to a **EC2** instance in a **ECS (Elastic Container Service)** cluster.
