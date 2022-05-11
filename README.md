@@ -47,7 +47,7 @@ predictive power, will be deployed in our Web Application for demonstrative purp
 ## Building Web Application for Predicting Prices of Apartments
 
 The Web Application makes use of the selected model(s) to make predictions of the rent prices of 
-apartments in Santiago and displays this information to the user.
+apartments in Santiago (in Chilean pesos or CLP) and displays this information to the user.
 Predicted rent prices are calculated based on the following fields which describe the desired apartment 
 and need to be entered by the user: 
 Apartment Surface (in square meters), Number of Bedrooms, Number of Bathrooms and Location (city).
