@@ -11,7 +11,7 @@ and stored into a raw dataset in the file `model/RENT_APARTMENT_RM_raw.csv`.
 
 This raw dataset was transformed through several stages of analysis, which are reported in several
 jupyter notebooks located in the directory `model/`.
-The first stage in this workflow was **Cleaning** the dataset and performing an **Exploratory Data Analysis (EDA)**, 
+The first stage in this workflow was [**Cleaning**](model/1_Santiago_Rent_Apartment_Cleaning.ipynb) the dataset and performing an **Exploratory Data Analysis (EDA)**, 
 in order to get familiar with the data, handle NaN values, dealing with outliers and selecting the features which will be used 
 for building a predictive model.
 The next stage involved conducting **Feature Engineering** and implementing these transformations in a preprocessing pipeline
