@@ -31,14 +31,18 @@ The following algorithms were used for model training:
 - **XGBoost Regressor**
 - **CatBoost Regressor**
 
-The best-performing trained models were then used to make predictions on the test set.
-The model(s) that performed best on this evaluation was selected for deployment in our Web Application.
-
-A final notebook presents a geospatial comparison of the 
-[**Model Predictions**](model/5_Santiago_Rent_Apartment_Model_Prediction.ipynb) made on the training and 
-test sets by the selected model(s) for deployment.
+The best-performing trained models for each algorithm were then used to make predictions on the test set. 
+The models that performed best on this evaluation (`model_xgb_f15_t436.pkl` and 
+`model_xgb_f15_t474.pkl` in the directory `app/server/artifacts/`) were then used in a final notebook to conduct a 
+geospatial comparison of their [**Model Predictions**](model/5_Santiago_Rent_Apartment_Model_Prediction.ipynb) 
+made on the training and test sets.
 Similar data distributions can be visualized as the different layers in a QGIS project 
 stored in `qgis/home-prices-santiago.qgz`.
+
+However, due to memory limitations on the cloud provider, another of the best-performing trained models 
+(`app/server/artifacts/model_xgb_f15_t397.pkl`), which is significantly lighter but has only slightly lower 
+predictive power, will be deployed in our Web Application for demonstrative purpose.
+
 
 ## Building Web Application for Predicting Prices of Apartments
 
@@ -52,8 +56,8 @@ with 50 square meters, 1 bedroom, 1 bathroom, which is located in *Estacion Cent
 
 The Web Application (see directory `app/`) is built in **JavaScript**, **HTML**, **CSS** and **Python**, using **Flask** 
 as a web framework for development.
-To overcome the intrinsic limitations of the **Flask's** built-in server, **Nginx** is used in deployment as a reverse proxy server 
-to handle the http requests.
+To overcome the intrinsic limitations of the **Flask's** built-in server, **Nginx** is used in deployment as 
+a reverse proxy server to handle the http requests.
 
 ![WebApp](app/app.png)
 
@@ -146,49 +150,75 @@ Then we configure the **AWS ECS** CLI, by creating an **ECS** cluster and profil
 (see documentation: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-cli-tutorial-ec2.html).
 
 ```
-ecs-cli configure --cluster hpsantiago-cluster --default-launch-type EC2 \
-    --config-name hpsantiago-cluster-config --region <region>
+ecs-cli configure \
+    --cluster hpsantiago-cluster \
+    --default-launch-type EC2 \
+    --config-name hpsantiago-cluster-config \
+    --region <region>
 ```
 
 ```
-ecs-cli configure profile --profile-name hpsantiago-cluster-config-profile \
-    --access-key <aws_access_key_id> --secret-key <aws_secret_access_key>
+ecs-cli configure profile \
+    --profile-name hpsantiago-cluster-config-profile \
+    --access-key <aws_access_key_id> \
+    --secret-key <aws_secret_access_key>
 ```
 
 Once the configuration steps are done, we create the **ECS** cluster using the configurations defined above.
 
 ```
-ecs-cli up --capability-iam --keypair <keypair_name> --size 1 --instance-type t2.micro \
-    --cluster-config hpsantiago-cluster-config --ecs-profile hpsantiago-cluster-config-profile \
-    --security-group <security_group_ids> --vpc <vpc_id> --subnets <subnet_1_id,subnet_2_id> --verbose
+ecs-cli up \
+    --capability-iam \
+    --keypair <keypair_name> \
+    --size 1 \
+    --instance-type t2.micro \
+    --cluster-config hpsantiago-cluster-config \
+    --ecs-profile hpsantiago-cluster-config-profile \
+    --security-group <security_group_ids> \
+    --vpc <vpc_id> \
+    --subnets <subnet_1_id,subnet_2_id> \
+    --verbose
 ```
 
-Here `<vpc_id>` can be obtained from: `aws ec2 describe-security-groups --group-id <security_group_id>`.
-While `<subnet_1_id,subnet_2_id>` are the ids of the two subnets associated to `<vpc_id>` found from:
-`aws ec2 describe-subnets` 
+Here `<vpc_id>` can be obtained from the command: `aws ec2 describe-security-groups --group-id <security_group_id>`.
+While `<subnet_1_id,subnet_2_id>` are the ids of two existent subnets associated to `<vpc_id>` found from the command:
+`aws ec2 describe-subnets --filters "Name=vpc-id,Values=<vpc_id>"` 
 
-After a few minutes, we should have our **ECS** cluster up and running, and we can deploy our **Docker** container into it.
-We can define this deployment as a registered task, which we then run and use to create a service for the defined task.
+After a few minutes, we should have the **EC2** instance in our **ECS** cluster up and running, and we can deploy 
+our **Docker** container into it.
+We can define this deployment as a registered task, which we then run and use to create a service that allows
+to maintain the defined task running.
 The following commands perform these deployment steps:
 
 ```
-aws ecs register-task-definition --cli-input-json file:///<path>/home-prices-santiago/deploy/aws_ecs_task_definition.json
+aws ecs register-task-definition \
+    --cli-input-json file://<path>/home-prices-santiago/deploy/aws_ecs_task_definition.json
 
-aws ecs run-task --cli-input-json file:///<path>/home-prices-santiago/deploy/aws_ecs_task_run.json
+aws ecs run-task \
+    --cli-input-json file://<path>/home-prices-santiago/deploy/aws_ecs_task_run.json
 
-aws ecs create-service --cli-input-json file:///<path>/home-prices-santiago/deploy/aws_ecs_service.json
+aws ecs create-service \
+    --cli-input-json file://<path>/home-prices-santiago/deploy/aws_ecs_service.json
 ```
 
 From the **AWS Console**, we should now be able to see that the defined task and service are running.
-Alternatively, we run the following commands to obtain the same information:
+Alternatively, we can run the following commands to obtain the same information:
 
 ```
 aws ecs list-tasks --cluster hpsantiago-cluster
 aws ecs list-services --cluster hpsantiago-cluster
 ```
 
-After confirming it, we will be able to inspect our Web Application by openning a browser under the Public DNS URL provided 
-for our **EC2** instance.
+If we want to examine the status of our deployed docker container, we can log into the **EC2** instance 
+and run any `docker` command, such as `docker ps`, as explained the **AWS** documentation 
+(https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html).
+
+```
+ssh -i <path_to_key_pair.pem> instance_user_name@instance_public_dns_name
+```
+
+After confirming it, we will be able to inspect our Web Application by openning a browser under the 
+Public DNS address provided for our **EC2** instance.
 
 In this case, the Web Application is accessible under the following URL:
-http://ec2-3-17-55-191.us-east-2.compute.amazonaws.com/
+http://ec2-3-139-238-137.us-east-2.compute.amazonaws.com/

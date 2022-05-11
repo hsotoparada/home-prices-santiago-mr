@@ -1,7 +1,7 @@
 {
     "cluster": "hpsantiago-cluster",
     "serviceName": "hpsantiago-service",
-    "taskDefinition": "hpsantiago-task:1",
+    "taskDefinition": "hpsantiago-task:20",
     "desiredCount": 1,
     "launchType": "EC2",
     "deploymentConfiguration": {

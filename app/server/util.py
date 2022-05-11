@@ -159,27 +159,23 @@ def load_saved_artifacts():
     global __model_features    
 
     if __data_pipeline is None:
-        # __data_pipeline = joblib.load('/home/app/server/artifacts/pipe_all.pkl')        
         __data_pipeline = joblib.load(f"{__path}/pipe_all.pkl")                
 
     if __data_locations is None:
-        # locations = sorted(joblib.load('/home/app/server/artifacts/list_location_geojson.pkl'))
         locations = sorted(joblib.load(f"{__path}/list_location_geojson.pkl"))        
         __data_locations = [l.title() for l in locations]
-        # __data_locations = sorted(joblib.load('server/artifacts/list_location_encoded.pkl'))        
 
     if __models is None:
-        # features = joblib.load('/home/app/server/artifacts/RENT_APARTMENT_RM_features.pkl')
         features = joblib.load(f"{__path}/RENT_APARTMENT_RM_features.pkl")        
         
         __models = []
         __model_features = []
-        fs = ['model_xgb_f15_t436.pkl', 'model_xgb_f15_t474.pkl']
+        # fs = ['model_xgb_f15_t436.pkl', 'model_xgb_f15_t474.pkl']
+        fs = ['model_xgb_f15_t397.pkl']        
         
         for f in fs:
             key_feature = int(f.split('_f')[-1][:2])
             __model_features.append(features[key_feature])
-            # __models.append(joblib.load(f"/home/app/server/artifacts/{f}"))
             __models.append(joblib.load(f"{__path}/{f}"))            
 
 def get_location_names():
