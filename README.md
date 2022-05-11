@@ -52,7 +52,7 @@ to handle the http requests.
 
 ### TODO: include screenshot of dashboard
 
-[Image](./app.png)
+![Image](./app.png)
 
 ## Deploying Web Application to AWS Cloud (ECR, EC2, ECS)
 
