@@ -47,7 +47,7 @@ apartments in Santiago and displays this information to the user.
 Predicted rent prices are calculated based on the following fields which describe the desired apartment 
 and need to be entered by the user: 
 Apartment Surface (in square meters), Number of Bedrooms, Number of Bathrooms and Location (city).
-The figure below illustrates the Web Application layout and the predicted rent price of an apartment 
+The figure below displays the Web Application layout and the predicted rent price of an apartment 
 with 50 square meters, 1 bedroom, 1 bathroom, which is located in *Estacion Central*.
 
 The Web Application (see directory `app/`) is built in **JavaScript**, **HTML**, **CSS** and **Python**, using **Flask** 
