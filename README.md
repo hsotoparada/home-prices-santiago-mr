@@ -11,30 +11,33 @@ and stored into a raw dataset in the file `model/RENT_APARTMENT_RM_raw.csv`.
 
 This raw dataset was transformed through several stages of analysis, which are reported in several
 jupyter notebooks located in the directory `model/`.
-The first stage in this workflow was [**Cleaning**](model/1_Santiago_Rent_Apartment_Cleaning.ipynb) the dataset and performing an **Exploratory Data Analysis (EDA)**, 
+The first stages in this workflow were [**Cleaning**](model/1_Santiago_Rent_Apartment_Cleaning.ipynb) the dataset 
+and performing an [**Exploratory Data Analysis (EDA)**](model/2_Santiago_Rent_Apartment_EDA.ipynb) 
 in order to get familiar with the data, handle NaN values, dealing with outliers and selecting the features which will be used 
 for building a predictive model.
-The next stage involved conducting **Feature Engineering** and implementing these transformations in a preprocessing pipeline
-that was applied to the training and test sets extracted from original dataset.
-Next, in the **Model Building** stage, various type of models, based on different algorithms, were trained to predict apartment 
-rent prices, in a supervised regression learning task.
+The next stage involved conducting [**Feature Engineering**](model/3_Santiago_Rent_Apartment_Feature_Engineering.ipynb) 
+where feature transformations were implemented in a preprocessing pipeline that was applied to the training and test sets 
+extracted from original dataset.
+Next, in the [**Model Building**](model/4_Santiago_Rent_Apartment_Model_Building.ipynb) stage, various type of models, 
+based on different algorithms, were trained to predict apartment rent prices, in a supervised regression learning task.
 For each model type, the training was carried out applying a 5-fold cross validation on the training set, and performing 
 hyperparameter optimization using **Optuna**.
 Here the parameters of each model type, as well as all possible set of predictor features in the training set, were considered as 
 hyperparameters to be optimized.
 The following algorithms were used for model training:
 
-- Multiple Regression
-- LGBM Regressor
-- XGBoost Regressor
-- CatBoost Regressor
+- **Multiple Regression**
+- **LGBM Regressor**
+- **XGBoost Regressor**
+- **CatBoost Regressor**
 
 The best-performing trained models were then used to make predictions on the test set.
 The model(s) that performed best on this evaluation was selected for deployment in our Web Application.
 
-A final notebook presents a geospatial comparison of the **Model Predictions** made 
-on the training and test sets by the selected model(s) for deployment.
-Similar data distributions can be visualized as the different layers in the QGIS project 
+A final notebook presents a geospatial comparison of the 
+[**Model Predictions**](model/5_Santiago_Rent_Apartment_Model_Prediction.ipynb) made on the training and 
+test sets by the selected model(s) for deployment.
+Similar data distributions can be visualized as the different layers in a QGIS project 
 stored in `qgis/home-prices-santiago.qgz`.
 
 ## Building Web Application for Predicting Prices of Apartments
