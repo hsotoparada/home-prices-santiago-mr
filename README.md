@@ -44,15 +44,15 @@ apartments in Santiago and displays this information to the user.
 Predicted rent prices are calculated based on the following fields which describe the desired apartment 
 and need to be entered by the user: 
 Apartment Surface (in square meters), Number of Bedrooms, Number of Bathrooms and Location (city).
+The figure below illustrates the Web Application layout and the predicted rent price of an apartment 
+with 50 square meters, 1 bedroom, 1 bathroom, which is located in *Estacion Central*.
 
 The Web Application (see directory `app/`) is built in **JavaScript**, **HTML**, **CSS** and **Python**, using **Flask** 
 as a web framework for development.
 To overcome the intrinsic limitations of the **Flask's** built-in server, **Nginx** is used in deployment as a reverse proxy server 
 to handle the http requests.
 
-### TODO: include screenshot of dashboard
-
-![Image](./app.png)
+![WebApp](./app.png)
 
 ## Deploying Web Application to AWS Cloud (ECR, EC2, ECS)
 
