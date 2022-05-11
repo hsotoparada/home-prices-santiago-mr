@@ -52,13 +52,15 @@ to handle the http requests.
 
 ### TODO: include screenshot of dashboard
 
+[Image](./app.png)
+
 ## Deploying Web Application to AWS Cloud (ECR, EC2, ECS)
 
 ### Containerizing Web Application:
 
 We will deploy our Web Application to the **Amazon Web Services (AWS) Cloud**.
 For this, we first build a docker image of our Web Application, based on the intructions 
-contained in the Dockerfile stored in the root directory of our git repository.
+contained in the Dockerfile stored in the `deploy` directory of our git repository.
 
 ```
 docker build -t home-prices-santiago:1.0 -f deploy/Dockerfile .
