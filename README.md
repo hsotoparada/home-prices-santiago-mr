@@ -52,7 +52,7 @@ as a web framework for development.
 To overcome the intrinsic limitations of the **Flask's** built-in server, **Nginx** is used in deployment as a reverse proxy server 
 to handle the http requests.
 
-![WebApp](./app.png)
+![WebApp](app/app.png)
 
 ## Deploying Web Application to AWS Cloud (ECR, EC2, ECS)
 
