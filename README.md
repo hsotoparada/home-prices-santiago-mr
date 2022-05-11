@@ -61,7 +61,7 @@ For this, we first build a docker image of our Web Application, based on the int
 contained in the Dockerfile stored in the root directory of our git repository.
 
 ```
-docker build -t home-prices-santiago:1.0 .
+docker build -t home-prices-santiago:1.0 -f deploy/Dockerfile .
 ```
 
 If the image was created, it should appear in the listed shown after running:

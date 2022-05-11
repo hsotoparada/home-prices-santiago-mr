@@ -11,9 +11,7 @@ __model_features = None
 __data_pipeline = None
 __data_locations = None
 __models = None
-# __path = "/home/app/server/artifacts"
-__path = "/home/hugo/Personal/Processing/git/home-prices-santiago/app/server/artifacts"
-
+__path = "/home/app/server/artifacts"
 
 class CustomOrdinalEncoder(TransformerMixin, BaseEstimator):
     """
