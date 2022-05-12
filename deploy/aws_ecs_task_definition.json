@@ -1,10 +1,10 @@
 {
-    "family": "hpsantiago-task",
+    "family": "hpsantiagomr-task",
     "networkMode": "host",
     "containerDefinitions": [
         {
-            "name": "hpsantiago-container",
-            "image": "<aws_account_id>.dkr.ecr.<region>.amazonaws.com/home-prices-santiago:latest",
+            "name": "hpsantiagomr-container",
+            "image": "<aws_account_id>.dkr.ecr.<region>.amazonaws.com/home-prices-santiago-mr:latest",
             "cpu": 1024,
             "memory": 900,
             "portMappings": [

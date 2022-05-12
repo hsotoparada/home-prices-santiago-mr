@@ -1,7 +1,7 @@
 {
-    "cluster": "hpsantiago-cluster",
+    "cluster": "hpsantiagomr-cluster",
     "count": 1,
     "enableECSManagedTags": true,
     "launchType": "EC2",
-    "taskDefinition": "hpsantiago-task:1"
+    "taskDefinition": "hpsantiagomr-task:1"
 }

@@ -60,7 +60,7 @@ a reverse proxy server to handle the http requests.
 
 ![WebApp](app/app.png)
 
-## Deploying Web Application to AWS Cloud (ECR, EC2, ECS)
+## Deploying Web Application to AWS Cloud (ECR, ECS, EC2)
 
 ### Containerizing Web Application:
 
