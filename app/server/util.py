@@ -166,7 +166,7 @@ def load_saved_artifacts():
         __data_locations = [l.title() for l in locations]
 
     if __models is None:
-        features = joblib.load(f"{__path}/RENT_APARTMENT_RM_features.pkl")        
+        features = joblib.load(f"{__path}/RENT_APARTMENT_MR_features.pkl")        
         
         __models = []
         __model_features = []

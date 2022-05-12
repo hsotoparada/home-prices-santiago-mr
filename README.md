@@ -10,14 +10,14 @@ and stored into a raw dataset in the file `model/RENT_APARTMENT_RM_raw.csv`.
 
 This raw dataset was transformed through several stages of analysis, which are reported in several
 jupyter notebooks located in the directory `model/`.
-The first stages in this workflow were [**Cleaning**](model/1_Santiago_Rent_Apartment_Cleaning.ipynb) the dataset 
-and performing an [**Exploratory Data Analysis (EDA)**](model/2_Santiago_Rent_Apartment_EDA.ipynb) 
+The first stages in this workflow were [**Cleaning**](model/1_Santiago_MR_Rent_Apartment_Cleaning.ipynb) the dataset 
+and performing an [**Exploratory Data Analysis (EDA)**](model/2_Santiago_MR_Rent_Apartment_EDA.ipynb) 
 in order to get familiar with the data, handle NaN values, dealing with outliers and selecting the features which will be used 
 for building a predictive model.
-The next stage involved conducting [**Feature Engineering**](model/3_Santiago_Rent_Apartment_Feature_Engineering.ipynb) 
+The next stage involved conducting [**Feature Engineering**](model/3_Santiago_MR_Rent_Apartment_Feature_Engineering.ipynb) 
 where feature transformations were implemented in a preprocessing pipeline that was applied to the training and test sets 
 extracted from original dataset.
-Next, in the [**Model Building**](model/4_Santiago_Rent_Apartment_Model_Building.ipynb) stage, various type of models, 
+Next, in the [**Model Building**](model/4_Santiago_MR_Rent_Apartment_Model_Building.ipynb) stage, various type of models, 
 based on different algorithms, were trained to predict apartment rent prices, in a supervised regression learning task.
 For each model type, the training was carried out applying a 5-fold cross validation on the training set, and performing 
 hyperparameter optimization using **Optuna**.
@@ -33,10 +33,10 @@ The following algorithms were used for model training:
 The best-performing trained models for each algorithm were then used to make predictions on the test set. 
 The models that performed best on this evaluation (`model_xgb_f15_t436.pkl` and 
 `model_xgb_f15_t474.pkl` in the directory `app/server/artifacts/`) were then used in a final notebook to conduct a 
-geospatial comparison of their [**Model Predictions**](model/5_Santiago_Rent_Apartment_Model_Prediction.ipynb) 
+geospatial comparison of their [**Model Predictions**](model/5_Santiago_MR_Rent_Apartment_Model_Prediction.ipynb) 
 made on the training and test sets.
 Similar data distributions can be visualized as the different layers in a QGIS project 
-stored in `qgis/home-prices-santiago.qgz`.
+stored in `qgis/home-prices-santiago-mr.qgz`.
 
 However, due to memory limitations on the cloud provider, another of the best-performing trained models 
 (`app/server/artifacts/model_xgb_f15_t397.pkl`), which is significantly lighter but has only slightly lower 
@@ -69,7 +69,7 @@ For this, we first build a docker image of our Web Application, based on the int
 contained in the Dockerfile stored in the `deploy` directory of our git repository.
 
 ```
-docker build -t home-prices-santiago:1.0 -f deploy/Dockerfile .
+docker build -t home-prices-santiago-mr:1.0 -f deploy/Dockerfile .
 ```
 
 If the image was created, it should appear in the listed shown after running:
@@ -81,7 +81,7 @@ docker images
 We can now create the **Docker** container associated to our image by running:
 
 ```
-docker run --network="host" -d home-prices-santiago:1.0
+docker run --network="host" -d home-prices-santiago-mr:1.0
 ```
 
 Here we added the "host" network option so that the the host (our local machine) network is 
@@ -112,19 +112,19 @@ aws ecr get-login-password --region <region> | docker login --username AWS \
 Next, we create a repository in **AWS ECR**:
 
 ```
-aws ecr create-repository --repository-name home-prices-santiago --region <region>
+aws ecr create-repository --repository-name home-prices-santiago-mr --region <region>
 ```
 
 In order to push our **Docker** image, we need to tag the image that will be pushed to our **ECR** repository.
 
 ```
-docker tag home-prices-santiago:1.0 <aws_account_id>.dkr.ecr.<region>.amazonaws.com/home-prices-santiago:latest
+docker tag home-prices-santiago-mr:1.0 <aws_account_id>.dkr.ecr.<region>.amazonaws.com/home-prices-santiago-mr:latest
 ```
 
 Finally, we push the **Docker** image to **ECR**:
 
 ```
-docker push <aws_account_id>.dkr.ecr.<region>.amazonaws.com/home-prices-santiago:latest
+docker push <aws_account_id>.dkr.ecr.<region>.amazonaws.com/home-prices-santiago-mr:latest
 ```
 
 ### Deploying Docker container to AWS EC2, ECS:
@@ -135,7 +135,7 @@ First we need to create a security group that includes the traffic rules that we
 our **ECS** cluster.
 
 ```
-aws ec2 create-security-group --group-name hpsantiago-sg --description "security group for home-prices-santiago"
+aws ec2 create-security-group --group-name hpsantiagomr-sg --description "security group for home-prices-santiago-mr"
 
 aws ec2 authorize-security-group-ingress --group-id <security_group_id> --protocol tcp --port 22 --cidr 0.0.0.0/0
 
@@ -150,15 +150,15 @@ Then we configure the **AWS ECS** CLI, by creating an **ECS** cluster and profil
 
 ```
 ecs-cli configure \
-    --cluster hpsantiago-cluster \
+    --cluster hpsantiagomr-cluster \
     --default-launch-type EC2 \
-    --config-name hpsantiago-cluster-config \
+    --config-name hpsantiagomr-cluster-config \
     --region <region>
 ```
 
 ```
 ecs-cli configure profile \
-    --profile-name hpsantiago-cluster-config-profile \
+    --profile-name hpsantiagomr-cluster-config-profile \
     --access-key <aws_access_key_id> \
     --secret-key <aws_secret_access_key>
 ```
@@ -171,8 +171,8 @@ ecs-cli up \
     --keypair <keypair_name> \
     --size 1 \
     --instance-type t2.micro \
-    --cluster-config hpsantiago-cluster-config \
-    --ecs-profile hpsantiago-cluster-config-profile \
+    --cluster-config hpsantiagomr-cluster-config \
+    --ecs-profile hpsantiagomr-cluster-config-profile \
     --security-group <security_group_ids> \
     --vpc <vpc_id> \
     --subnets <subnet_1_id,subnet_2_id> \
@@ -191,21 +191,21 @@ The following commands perform these deployment steps:
 
 ```
 aws ecs register-task-definition \
-    --cli-input-json file://<path>/home-prices-santiago/deploy/aws_ecs_task_definition.json
+    --cli-input-json file://<path>/home-prices-santiago-mr/deploy/aws_ecs_task_definition.json
 
 aws ecs run-task \
-    --cli-input-json file://<path>/home-prices-santiago/deploy/aws_ecs_task_run.json
+    --cli-input-json file://<path>/home-prices-santiago-mr/deploy/aws_ecs_task_run.json
 
 aws ecs create-service \
-    --cli-input-json file://<path>/home-prices-santiago/deploy/aws_ecs_service.json
+    --cli-input-json file://<path>/home-prices-santiago-mr/deploy/aws_ecs_service.json
 ```
 
 From the **AWS Console**, we should now be able to see that the defined task and service are running.
 Alternatively, we can run the following commands to obtain the same information:
 
 ```
-aws ecs list-tasks --cluster hpsantiago-cluster
-aws ecs list-services --cluster hpsantiago-cluster
+aws ecs list-tasks --cluster hpsantiagomr-cluster
+aws ecs list-services --cluster hpsantiagomr-cluster
 ```
 
 If we want to examine the status of our deployed docker container, we can log into the **EC2** instance 
