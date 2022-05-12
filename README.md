@@ -1,10 +1,9 @@
 ![](server/artifacts/santiago.jpg)
 
-# Predicting Apartment Rent Prices in Santiago, Chile
+# Predicting Apartment Rent Prices in Santiago Metropolitan Region, Chile
 
-This data science project showcases a real estate price prediction study in Santiago (Chile). 
-A Web Application displays the rent price of apartments in Santiago, which are predicted 
-by a machine learning model. 
+This data science project showcases a real estate price prediction study in Santiago Metropolitan Region of Chile. 
+A Web Application displays the rent price of apartments, which are predicted by a machine learning model. 
 
 The apartment listings were collected from https://www.portalinmobiliario.com/ 
 and stored into a raw dataset in the file `model/RENT_APARTMENT_RM_raw.csv`. 
@@ -47,7 +46,7 @@ predictive power, will be deployed in our Web Application for demonstrative purp
 ## Building Web Application for predicting rent prices
 
 The Web Application makes use of the selected model(s) to make predictions of the rent price of 
-apartments in Santiago (in Chilean pesos or CLP) and displays this information to the user.
+apartments in the Santiago Metropolitan Region (in Chilean pesos or CLP) and displays this information to the user.
 Predicted rent prices are calculated based on the following fields which describe the desired apartment 
 and need to be entered by the user: 
 Apartment Surface (in square meters), Number of Bedrooms, Number of Bathrooms and Location (city).
