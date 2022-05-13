@@ -219,5 +219,5 @@ ssh -i <path_to_key_pair.pem> instance_user_name@instance_public_dns_name
 After confirming it, we will be able to inspect our Web Application by openning a browser under the 
 Public DNS address provided for our **EC2** instance.
 
-In this case, the Web Application is accessible under the following URL:
+In this case, the Web Application is temporally accessible under the following URL:
 http://ec2-3-139-238-137.us-east-2.compute.amazonaws.com/
