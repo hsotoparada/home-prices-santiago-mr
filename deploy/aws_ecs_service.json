@@ -1,7 +1,7 @@
 {
     "cluster": "hpsantiagomr-cluster",
     "serviceName": "hpsantiagomr-service",
-    "taskDefinition": "hpsantiagomr-task:20",
+    "taskDefinition": "hpsantiagomr-task:1",
     "desiredCount": 1,
     "launchType": "EC2",
     "deploymentConfiguration": {
