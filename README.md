@@ -3,9 +3,9 @@
 # Predicting Apartment Rent Prices in Santiago Metropolitan Region, Chile
 
 This data science project showcases a real estate price prediction study in Santiago Metropolitan Region of Chile. 
-A Web Application displays the rent price of apartments, which are predicted by a machine learning model. 
+A Web Application is deployed to display the rent price of apartments predicted by a trained machine learning model. 
 
-The apartment listings were collected from https://www.portalinmobiliario.com/ 
+The apartment listings used for model training were collected from https://www.portalinmobiliario.com/ 
 and stored into a raw dataset in the file `model/RENT_APARTMENT_RM_raw.csv`. 
 
 This raw dataset was transformed through several stages of analysis, which are reported in several
@@ -38,16 +38,16 @@ made on the training and test sets.
 Similar data distributions can be visualized as the different layers in a QGIS project 
 stored in `qgis/home-prices-santiago-mr.qgz`.
 
-However, due to memory limitations on the cloud provider, another of the best-performing trained models 
-(`app/server/artifacts/model_xgb_f15_t397.pkl`), which is significantly lighter but has only slightly lower 
-predictive power, will be deployed in our Web Application for demonstrative purpose.
+However, due to memory limitations on the chosen cloud provider service, another of the best-performing trained models 
+(`app/server/artifacts/model_xgb_f15_t397.pkl`), which has only slightly lower predictive power but 
+is significantly lighter, will be deployed in our Web Application for demonstrative purpose.
 
 
 ## Building Web Application for predicting rent prices
 
-The Web Application makes use of the selected model(s) to make predictions of the rent price of 
+The Web Application makes use of the selected model to make predictions of the rent price of 
 apartments in the Santiago Metropolitan Region (in Chilean pesos or CLP) and displays this information to the user.
-Predicted rent prices are calculated based on the following fields which describe the desired apartment 
+Predicted rent prices are calculated based on the following fields which describe an apartment 
 and need to be entered by the user: 
 Apartment Surface (in square meters), Number of Bedrooms, Number of Bathrooms and Location (city).
 The figure below displays the Web Application layout and the predicted rent price of an apartment 
