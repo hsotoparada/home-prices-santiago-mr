@@ -220,4 +220,4 @@ After confirming it, we will be able to inspect our Web Application by openning 
 Public DNS address provided for our **EC2** instance.
 
 In this case, the Web Application is temporally accessible under the following URL:
-http://ec2-3-139-238-137.us-east-2.compute.amazonaws.com/
+http://ec2-18-222-177-207.us-east-2.compute.amazonaws.com/
