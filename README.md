@@ -130,7 +130,7 @@ docker push <aws_account_id>.dkr.ecr.<region>.amazonaws.com/home-prices-santiago
 ### Deploying Docker container to AWS EC2, ECS:
 
 Now, we will make use of the **AWS Command Line Interface** (CLI) tool to deploy the **Docker** image stored in **ECR** 
-to a **EC2** (Elastic Compute Cloud) instance in a **ECS (Elastic Container Service)** cluster.
+to a **EC2 (Elastic Compute Cloud)** instance in a **ECS (Elastic Container Service)** cluster.
 First we need to create a security group that includes the traffic rules that we will allow for the **EC2** instance in 
 our **ECS** cluster.
 
